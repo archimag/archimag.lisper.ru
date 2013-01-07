@@ -14,14 +14,14 @@
  (merge-pathnames "static/" (asdf:component-pathname  (asdf:find-system '#:archimag.lisper.ru))))
 
 
-(restas:mount-submodule -arblog- (#:arblog)
+(restas:mount-module -arblog- (#:arblog)
   (arblog:*blog-name* "archimag")
   (arblog:*posts-on-page* 10)
   
-  (arblog:*datastore* (make-instance 'arblog.datastore.mongodb:arblog-mongo-datastore))
-  (arblog:*markup* (make-instance 'arblog.markup.rst:arblog-rst-markup))
-  (arblog:*theme* (make-instance 'arblog.theme.mirev:arblog-mirev-theme
-                                 :templates-package '#:arblog.theme.mirev_archimag.tmpl))
+  (arblog.internal.datastore:*datastore* (make-instance 'arblog.datastore.mongodb:arblog-mongo-datastore))
+  (arblog.internal.markup:*markup* (make-instance 'arblog.markup.rst:arblog-rst-markup))
+  (arblog.internal.theme:*theme* (make-instance 'arblog.theme.mirev:arblog-mirev-theme
+                                                :templates-package '#:arblog.theme.mirev_archimag.tmpl))
   
   (arblog:*disqus-shortname* "archimagblog")
   (arblog:*disqus-developer-mode* nil)
